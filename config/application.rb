@@ -28,8 +28,8 @@ module UserBase
       :address => 'smtp.gmail.com',
       :domain => 'mail.google.com',
       :port => 587,
-      :user_name => 'davidpfefferglass@gmail.com',
-      :password => 'pfefferglass',
+      :user_name => ENV['MAILING_USER'],
+      :password => ENV['MAILING_PASS'],
       :authentication => 'login',
       :enable_starttls_auto => true
       
