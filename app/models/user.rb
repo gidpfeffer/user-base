@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
         
   private
   def set_default_info
-    self.info = Info.new(first_name: "test first name")
+    self.info = Info.new()
   end
   
 end
