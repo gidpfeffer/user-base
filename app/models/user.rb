@@ -3,4 +3,13 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
+     
+  has_one :info    
+  before_create :set_default_info
+        
+  private
+  def set_default_info
+    self.info = Info.new(first_name: "test first name")
+  end
+  
 end
