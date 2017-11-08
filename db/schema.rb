@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20171107042314) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "infos", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -23,7 +26,7 @@ ActiveRecord::Schema.define(version: 20171107042314) do
     t.integer  "user_id"
   end
 
-  add_index "infos", ["user_id"], name: "index_infos_on_user_id"
+  add_index "infos", ["user_id"], name: "index_infos_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -44,8 +47,9 @@ ActiveRecord::Schema.define(version: 20171107042314) do
     t.datetime "updated_at",                          null: false
   end
 
-  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "infos", "users"
 end
